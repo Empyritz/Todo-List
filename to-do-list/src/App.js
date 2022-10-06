@@ -1,24 +1,37 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import { TodoButton } from './Components/TodoButton';
+import { TodoCounter } from './Components/TodoCounter';
+import { TodoList } from './Components/TodoList';
+import { TodoSearch } from './Components/TodoSearch';
+import { useGlobalContext } from './Context/TodoContext' 
+import { Modal } from './Components/Modal'
+import { TodoForm } from './Components/TodoForm';
 
+
+//----------------------------------------- APP ----------------------
 function App() {
+  const { loading, error, totalTodos, openModal} = useGlobalContext()
+
+  //---LISTA DE TODOS
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <TodoCounter />
+      <TodoSearch />
+      <TodoList>
+        <div className='conditionalScreens'>
+          {loading && <p>Estamos cagandooo, pasame el papel</p>}
+          {error && <p>Ya se cagooo esto</p>}
+          {(!loading && totalTodos === 0) && <p>Escribe tu primer Todo</p>}
+        </div>
+        
+      </TodoList>
+      <TodoButton />
+     {openModal &&  <Modal>
+        <TodoForm />
+      </Modal>}
+    </React.Fragment>
   );
 }
 

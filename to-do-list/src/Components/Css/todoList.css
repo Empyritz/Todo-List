@@ -1,0 +1,16 @@
+ul {
+  margin: 0;
+  padding: 0 0 56px 0;
+  list-style: none;
+  text-align: center;
+}
+
+.conditionalScreens p {
+  font-weight: 600;
+  background-color: antiquewhite;
+  border-radius: 13px;
+  padding: 1rem;
+  width: 80%;
+  box-sizing: border-box;
+  margin: 3rem auto 0 auto;
+}
