@@ -1,18 +1,19 @@
 import React from 'react';
 import './Css/todoList.css'
-import { TodoItem } from './TodoItem';
-import { useGlobalContext } from '../Context/TodoContext' 
 
 
-export const TodoList = ({children}) => {
-  const { searchedTodos, completeTodo, deleteTodo } = useGlobalContext()
-  const todosList = searchedTodos.map((item, index)=>(<TodoItem key={index} {...item} completeTodo={completeTodo} deleteTodo={deleteTodo}/>)) 
+export const TodoList = ({error, loading, totalTodos, searchedTodos, ...props}) => {
+  // const { searchedTodos, completeTodo, deleteTodo } = useTodos()
 
   return (
-    <section>
+    <section className='TodoList-container'>
       <ul>
-        {children}
-        {todosList}
+        {error && props.onError()}
+        {loading && props.onLoading()}
+        {(!loading && !totalTodos) && props.onEmptyTodos()}
+        {(!!totalTodos && !searchedTodos.length) && props.onEmptySearch()}
+        {searchedTodos.map((todo, index) => props.render(todo, index))}
+        {/* {props.searchedTodos.map(props.render)} */}
       </ul>
     </section>
   )

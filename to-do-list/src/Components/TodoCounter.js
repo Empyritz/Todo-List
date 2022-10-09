@@ -1,10 +1,8 @@
 import React from 'react';
 import './Css/todoCounter.css'
-import { useGlobalContext } from '../Context/TodoContext' 
 
 
-const TodoCounter = () => {
-  const {totalTodos, completedTodos } = useGlobalContext()
+const TodoCounter = ({totalTodos, completedTodos}) => {
   return (
     <h1 className='TodoCounter'>Has completado {completedTodos} de {totalTodos} TODOs</h1>
   )

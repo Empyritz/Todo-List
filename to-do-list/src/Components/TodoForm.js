@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { useGlobalContext } from '../Context/TodoContext';
 import './Css/todoForm.css'
 
-export const TodoForm = () => {
-  const { addTodo, setOpenModal } = useGlobalContext()
+export const TodoForm = ({ addTodo, setOpenModal }) => {
   const [newTodoValue, setNewTodoValue] = useState()
 
   

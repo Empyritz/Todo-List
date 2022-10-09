@@ -1,9 +1,7 @@
 import React from 'react';
 import './Css/todoButton.css'
-import { useGlobalContext } from '../Context/TodoContext';
 
-const TodoButton = ( ) => {
-  const { setOpenModal } = useGlobalContext()
+const TodoButton = ({ setOpenModal }) => {
 
   return (
     <button className='CreateTodoButton' onClick={()=> setOpenModal(prev => !prev)}>+</button>
