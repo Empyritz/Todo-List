@@ -4,8 +4,8 @@ function TodoHeader ({children, loading}){
   return ( 
     <header>
       {React.Children
-        .toArray(React
-        .cloneElement(children, { loading }))}
+        .toArray(children)
+        .map(child => React.cloneElement(child, { loading }))}
     </header>
   )
 }
