@@ -11,8 +11,8 @@ import { TodoError } from '../Components/TodoError';
 import { TodoLoading } from '../Components/TodoLoading';
 import { EmptyTodos } from '../Components/EmptyTodos';
 import { TodoItem } from '../Components/TodoItem';
-import { EmptySearch } from '../Components/EmptySearch'
-// import { TodoHeader } from '../Components/TodoHeader'; 
+import { EmptySearch } from '../Components/EmptySearch';
+import { TodoHeader } from '../Components/TodoHeader'; 
 
 // const todosList = searchedTodos.map() 
 
@@ -37,10 +37,10 @@ function App() {
 
   return (
     <React.Fragment>
-      {/* <TodoHeader> */}
-        <TodoCounter totalTodos={totalTodos} completedTodos={completedTodos}/>
-        <TodoSearch valueSearch={valueSearch} setValueSearch={setValueSearch}/>
-      {/* </TodoHeader> */}
+      <TodoHeader>
+        <TodoCounter totalTodos={totalTodos} completedTodos={completedTodos} />
+        <TodoSearch valueSearch={valueSearch} setValueSearch={setValueSearch} />
+      </TodoHeader>
       {/* Render functions y render props */}
       <TodoList  
         error={error}
