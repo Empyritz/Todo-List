@@ -10,7 +10,7 @@ export const TodoForm = () => {
   const handlerSubmit = (e)=> {
     e.preventDefault()
     addTodo(newTodoValue)
-    setOpenModal(prev => !prev)
+    setOpenModal(prev => !prev);
 
   }
   
