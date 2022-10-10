@@ -1,11 +1,69 @@
-import { useEffect, useState } from "react"
+import { useEffect, useReducer } from "react"
+
+const initialState = (initialValue) => ({
+  synchronizedItem: true,
+    error: false,
+    loading: true,
+    item: initialValue
+})
+
+const actionTypes = {
+  error: 'ERROR',
+  succes: 'SUCCES',
+  save: 'SAVE',
+  update: 'UPDATE'
+}
+
+const reducerObject = (state, payload) => ({
+  [actionTypes.error]: {
+    ...state,
+    error: true,
+  },
+  [actionTypes.success]: {
+    ...state,
+    loading: false,
+    synchronizedItem: true,
+    item: payload,
+    error: false
+  },
+  [actionTypes.save]: {
+    ...state,
+    item: payload
+  },
+  [actionTypes.update]: {
+    ...state,
+    loading: true,
+    synchronizedItem: false
+  }
+})
+
+const reducer = (state, action) => {
+  if(reducerObject(state)[action.type]){
+    return reducerObject(state, action.payload)[action.type]
+  }else {
+    return {...state}
+  }
+}
+
+// const reducer = (state, action) => {
+//   reducerObject(state, action.payload)[action.type] || state;
+// }
+
 
 export function useLocalStorage (itemName, initialValue) {
-  const [synchronizedItem, setSynchronizedItem] = useState(true)
-  const [error, setError] = useState(false)
-  const [loading, setLoading] = useState(true)
-  const [item, setItem] = useState(initialValue)
+  const [state, dispatch] = useReducer(reducer, initialState(initialValue))
+  const { 
+    synchronizedItem,
+    error, 
+    loading,
+    item
+   } = state
 
+  //ACTION CREATORS
+  const onError = (err) => {dispatch({ type: actionTypes.error, payload: err })}
+  const onSuccess = (item) => {dispatch({ type: actionTypes.success , payload: item})}
+  const onSave = (item) => {dispatch({ type: actionTypes.save, payload: item})}
+  const onUpdate = () => {dispatch({ type: actionTypes.update })}
   
   useEffect(()=> {
     setTimeout(()=> {
@@ -20,13 +78,10 @@ export function useLocalStorage (itemName, initialValue) {
         else{
           parsedItem = locaStorageItem
         }
-
-        setItem(parsedItem)
-        setLoading(false)
-        setSynchronizedItem(true)
+        onSuccess(parsedItem)
       }
       catch (err) {
-        setError(err)
+        onError(err)
       }
     }, 1000)
   }, [synchronizedItem])
@@ -36,19 +91,17 @@ export function useLocalStorage (itemName, initialValue) {
     try {
       const stringifiedItem = JSON.stringify(newItem)
       localStorage.setItem(itemName, stringifiedItem)
-      setItem(newItem)
+      onSave(newItem)
     } 
     catch (err) {
-      setError(err)
+      onError(err)
     }
   }
 
   const updateItem = () => {
-    setLoading(true)
-    setSynchronizedItem(false)
+    onUpdate()
   }
 
   return {item, saveItem, loading, error, updateItem};
-  // return [item, saveItem];
 
 }
