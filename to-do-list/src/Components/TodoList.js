@@ -12,7 +12,7 @@ export const TodoList = ({error, loading, totalTodos, searchedTodos, ...props}) 
         {loading && props.onLoading()}
         {(!loading && !totalTodos) && props.onEmptyTodos()}
         {(!!totalTodos && !searchedTodos.length) && props.onEmptySearch()}
-        {searchedTodos.map((todo, index) => props.render(todo, index))}
+        {!loading && searchedTodos.map((todo, index) => props.render(todo, index))}
         {/* {props.searchedTodos.map(props.render)} */}
       </ul>
     </section>

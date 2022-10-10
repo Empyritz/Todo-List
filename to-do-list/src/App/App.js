@@ -13,6 +13,7 @@ import { EmptyTodos } from '../Components/EmptyTodos';
 import { TodoItem } from '../Components/TodoItem';
 import { EmptySearch } from '../Components/EmptySearch';
 import { TodoHeader } from '../Components/TodoHeader'; 
+import { ChangeAlertWithStorgageListener } from '../Components/ChangeAlert/ChangeAlert'
 
 // const todosList = searchedTodos.map() 
 
@@ -30,7 +31,8 @@ function App() {
     setOpenModal,
     completeTodo,
     deleteTodo,
-    searchedTodos
+    searchedTodos,
+    sincronizedTodos,
   } = useTodos()
 
   //---LISTA DE TODOS
@@ -58,6 +60,7 @@ function App() {
      {openModal &&  <Modal>
         <TodoForm addTodo={addTodo} setOpenModal={setOpenModal}/>
       </Modal>}
+      <ChangeAlertWithStorgageListener sincronizedTodos={sincronizedTodos}/>
     </React.Fragment>
   );
 }
