@@ -6,7 +6,7 @@ import { useLocalStorage } from './useLocalStorage';
 
 const useTodos = ()=> {
   //---ESTADOS
-  const {item: todos, saveItem: saveTodos, loading, error, sincronizeItem: sincronizedTodos} = useLocalStorage('TODOS_V1', [])
+  const {item: todos, saveItem: saveTodos, loading, error, updateItem: updateTodos} = useLocalStorage('TODOS_V1', [])
   // const [todos, saveTodos] = useLocalStorage('TODOS_V1', defaultTodos)
   const [valueSearch, setValueSearch] = useState('')
   const [openModal, setOpenModal] = useState(false)
@@ -72,7 +72,7 @@ const useTodos = ()=> {
       openModal,
       setOpenModal,
       addTodo,
-      sincronizedTodos,
+      updateTodos,
     }
   )
 }
