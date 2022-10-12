@@ -1,0 +1,29 @@
+{
+  "env": {
+    "browser": true
+  },
+  "extends": ["airbnb", "airbnb/hooks"],
+  "rules": {
+    "react/no-unstable-nested-components": [
+      "off",
+      { "allowAsProps": true }
+    ],
+    "react/jsx-props-no-spreading": ["error", {
+      "custom": "ignore" 
+    }]
+    // "jsx-a11y/no-noninteractive-element-interactions": [
+    //   "off",
+    //   {
+    //     "handlers": [
+    //       "onClick",
+    //       "onMouseDown",
+    //       "onMouseUp",
+    //       "onKeyPress",
+    //       "onKeyDown",
+    //       "onKeyUp"
+    //     ]
+    //   }
+    // ]
+  }
+}
+

@@ -1,7 +1,9 @@
 import React from 'react';
 
-export function TodoError (){
+function TodoError() {
   return (
     <>Uy Algo salio maalll....</>
-  )
+  );
 }
+
+export default TodoError;
